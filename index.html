@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rankmi · Operación exponencial · IA + personas</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            background: #eef2f5;
+            color: #1a283a;
+            line-height: 1.5;
+            padding: 2rem;
+        }
+
+        .slide {
+            max-width: 1300px;
+            margin: 0 auto 2rem auto;
+            background: #ffffff;
+            border-radius: 2rem;
+            box-shadow: 0 20px 35px -10px rgba(0,20,30,0.15);
+            padding: 3rem 4rem;
+            border: 1px solid #d4e0ec;
+        }
+
+        h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(145deg, #0d3b4f, #1d5e7a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: #0d3b4f;
+            border-left: 8px solid #c4452c;
+            padding-left: 1.5rem;
+            margin: 2.5rem 0 1.5rem 0;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1b4b66;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .card {
+            background: #f6faff;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            border: 1px solid #cfddee;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.02);
+        }
+
+        .card-highlight {
+            background: #fff3e0;
+            border-left: 6px solid #c4452c;
+        }
+
+        .badge {
+            background: #e1ecfe;
+            color: #0b3b5a;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-right: 0.5rem;
+        }
+
+        .badge-orange {
+            background: #fde6d8;
+            color: #b3411f;
+        }
+
+        .badge-dark {
+            background: #1d3f55;
+            color: white;
+        }
+
+        .badge-ai {
+            background: #2c5f8a;
+            color: white;
+            font-weight: 600;
+        }
+
+        .data-bar {
+            background: #e1e8f0;
+            height: 0.9rem;
+            border-radius: 20px;
+            margin: 0.8rem 0;
+        }
+
+        .bar-fill {
+            background: #c4452c;
+            height: 0.9rem;
+            border-radius: 20px;
+            width: 0%;
+        }
+
+        .icon-lg {
+            font-size: 2.8rem;
+            color: #1d5e7a;
+            margin-bottom: 0.5rem;
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #aac3d9, transparent);
+            margin: 2rem 0;
+        }
+
+        .quote-block {
+            background: #1d2e3f;
+            color: white;
+            padding: 2rem;
+            border-radius: 2rem;
+            font-size: 1.3rem;
+            font-style: italic;
+        }
+
+        .timeline {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .timeline-step {
+            background: #ecf3fa;
+            border-radius: 2rem;
+            padding: 1.5rem;
+            flex: 1 1 200px;
+            border: 1px solid #b9d0e5;
+        }
+
+        .warning-note {
+            background: #fff1e0;
+            border-left: 6px solid #c4452c;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            margin: 1.5rem 0;
+            font-weight: 500;
+        }
+
+        .single-point {
+            background: #0e2b38;
+            color: white;
+            padding: 2rem;
+            border-radius: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .debate-box {
+            background: #1d2e3f;
+            border-radius: 2rem;
+            padding: 2rem;
+            color: white;
+            margin-top: 2rem;
+        }
+
+        .debate-box h3 {
+            color: #facc15;
+        }
+
+        .tool-detail {
+            background: #f0f5fa;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid #b0c8dd;
+            margin-bottom: 1.5rem;
+        }
+
+        .tool-detail h4 {
+            font-size: 1.3rem;
+            color: #0d3b4f;
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            text-align: center;
+            color: #5f7d9c;
+            font-size: 0.9rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 800px) {
+            .slide { padding: 2rem; }
+            h1 { font-size: 2.5rem; }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- SLIDE 1: La cara de Rankmi son estas personas -->
+<div class="slide">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+        <span class="badge badge-orange" style="font-size: 1.1rem;"><i class="fas fa-bolt"></i> diagnóstico operación pura</span>
+        <span class="badge-dark badge">enfoque: personas + IA</span>
+    </div>
+    <h1>La primera capa: <br>personas, no sistema. <span style="color:#c4452c;">¿Y si hacemos lo mismo?</span></h1>
+    <div class="grid-2">
+        <div class="card-highlight">
+            <i class="fas fa-user-tie icon-lg" style="color:#c4452c;"></i>
+            <h3>El problema es de personas (sí)</h3>
+            <ul style="list-style-type: none; font-size: 1.2rem;">
+                <li><i class="fas fa-times-circle" style="color:#b91c1c;"></i> Dependemos de "genes raros" para que un consultor destaque.</li>
+                <li><i class="fas fa-times-circle" style="color:#b91c1c;"></i> No podemos recontratar a toda la plantilla con perfiles ideales.</li>
+                <li><i class="fas fa-times-circle" style="color:#b91c1c;"></i> Hacemos lo mismo y esperamos resultados distintos → falacia.</li>
+                <li><i class="fas fa-times-circle" style="color:#b91c1c;"></i> La cara de Rankmi (primera capa) nunca ha sido un foco medido.</li>
+            </ul>
+        </div>
+        <div class="card">
+            <i class="fas fa-brain icon-lg"></i>
+            <h3>Lo intangible que sí importa</h3>
+            <p><span class="badge">confianza</span> <span class="badge">seguridad</span> <span class="badge">velocidad de respuesta</span> <span class="badge">resolución sin escalar</span> <span class="badge">empatía</span></p>
+            <p>No lo medimos, pero el cliente lo siente. Y cuando falla, la culpa recae en la persona, no en la falta de herramientas.</p>
+            <div class="warning-note" style="margin-top: 1rem;">
+                <i class="fas fa-undo-alt"></i> <strong>Regresar al pasado no es malo:</strong> hubo prácticas que funcionaban (seguimiento cercano, reconocimiento público, pares entrenando pares). Podemos rescatarlas.
+            </div>
+        </div>
+    </div>
+    <div class="single-point">
+        <i class="fas fa-bullseye" style="color: #facc15; font-size: 2rem; float: left; margin-right: 1rem;"></i>
+        <p style="font-size: 1.4rem; font-weight: 300;"><strong>Punto único de falla:</strong> Creer que un sistema rígido reemplazará el talento. No podemos fabricar "genes raros", pero podemos hacer visible su valor y contagiar prácticas.</p>
+    </div>
+</div>
+
+<!-- SLIDE 2: Si hacemos las cosas iguales, resultados iguales -->
+<div class="slide">
+    <h2>⏳ Deconstrucción: el bucle de la mediocridad</h2>
+    <div class="grid-3">
+        <div class="card">
+            <i class="fas fa-repeat icon-lg"></i>
+            <h3>Mismo enfoque</h3>
+            <p>Seguimos con categorías Jr/Sr sin datos objetivos. Los consultores no saben qué mejorar, y los que tienen "gen raro" se frustran porque su habilidad no es reconocida.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-chart-line icon-lg"></i>
+            <h3>Mismas métricas</h3>
+            <p>Sólo NPS. No medimos velocidad, resolución de complejidad, ni la percepción de seguridad que transmite el consultor.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-dna icon-lg"></i>
+            <h3>Dependencia del "gen raro"</h3>
+            <p>Confiamos en que aparezcan personas excepcionales. No es escalable. El 80% de la plantilla son personas normales que pueden mejorar con visibilidad y estándares claros.</p>
+        </div>
+    </div>
+    <div class="divider"></div>
+    <div class="quote-block">
+        <i class="fas fa-quote-left" style="margin-right: 1rem;"></i> La historia de Blockbuster: tenían tiendas con empleados carismáticos que fidelizaban, pero no midieron ni estandarizaron esa "magia". Cuando llegó Netflix, la falta de datos sobre la interacción los mató. Nosotros no queremos ser Blockbuster.
+    </div>
+</div>
+
+<!-- SLIDE 3: Herramientas existentes: el caso del manager que construyó soluciones -->
+<div class="slide">
+    <h2>🔧 El elefante en la habitación: herramientas no autorizadas</h2>
+    <div class="card-highlight" style="margin-bottom: 2rem;">
+        <i class="fas fa-tools icon-lg" style="color:#c4452c;"></i>
+        <h3>Un manager (ex consultor/PM) desarrolló productos que resuelven toneladas de horas de operación</h3>
+        <p>Las mostró hace semanas, ofreció integrarlas al producto. <strong>Quedó en nada.</strong> Iniciativas que eliminan trabajo manual (revisar excels, preparar cargas) y liberan tiempo para que los consultores se enfoquen en clientes.</p>
+        <p style="margin-top: 1rem;"><span class="badge-orange badge">situación actual</span> No autorizadas, no validadas por producto, pero existen y funcionan.</p>
+    </div>
+    <div class="grid-2">
+        <div>
+            <h3><i class="fas fa-hourglass-half"></i> ¿Qué liberan?</h3>
+            <ul>
+                <li>Automatización de reportes de seguimiento.</li>
+                <li>Carga masiva de datos de clientes.</li>
+                <li>Validaciones de integridad que antes tomaban horas.</li>
+            </ul>
+        </div>
+        <div>
+            <h3><i class="fas fa-ban"></i> ¿Por qué no se usan?</h3>
+            <ul>
+                <li>Miedo a "sombra de TI" (producto no lo avala).</li>
+                <li>Falta de proceso para integrar iniciativas bottom-up.</li>
+                <li>Protección de territorio de producto.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="warning-note" style="margin-top: 1.5rem;">
+        <i class="fas fa-exclamation-triangle"></i> Si estas herramientas no se liberan, el piloto se ahogará en trabajo manual. Necesitamos autorización expresa para usarlas durante el piloto.
+    </div>
+</div>
+
+<!-- SLIDE 4: Incentivos psicológicos (salir de la zona de confort) -->
+<div class="slide">
+    <h2>🧠 Más allá del dinero: incentivos psicológicos</h2>
+    <div class="grid-2">
+        <div>
+            <h3><i class="fas fa-feather"></i> ¿Qué motiva a un consultor a mejorar?</h3>
+            <ul>
+                <li><strong>Dominio:</strong> querer ser experto en algo.</li>
+                <li><strong>Autonomía:</strong> tener control sobre cómo hacer su trabajo.</li>
+                <li><strong>Propósito:</strong> sentir que su trabajo impacta al cliente y al equipo.</li>
+                <li><strong>Reconocimiento público:</strong> ser visto por pares como referente.</li>
+            </ul>
+        </div>
+        <div>
+            <h3><i class="fas fa-rocket"></i> Cómo aplicarlo en el piloto</h3>
+            <ul>
+                <li>Publicar un ranking de "expertise" (no competitivo, sino de referencia).</li>
+                <li>Que los consultores puedan elegir en qué módulos certificarse.</li>
+                <li>Dar espacios para que enseñen a otros (mentoría invertida).</li>
+                <li>Reconocimiento en reuniones generales con ejemplos reales.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="quote-block" style="margin-top: 1.5rem; background: #f2e9de; color: #1d2e3f;">
+        <i class="fas fa-quote-right"></i> El dinero no compra compromiso; el reconocimiento y el dominio sí. Pero requieren visibilidad.
+    </div>
+</div>
+
+<!-- SLIDE 5: El piloto (flexible, pero con condiciones) -->
+<div class="slide">
+    <h2>🧪 Piloto de 3 meses: condiciones de éxito</h2>
+    <div class="timeline">
+        <div class="timeline-step">
+            <i class="fas fa-magnifying-glass icon-lg"></i>
+            <h3>Semana 1-2</h3>
+            <p>Seleccionar 5-8 consultores voluntarios. <strong>Autorizar herramientas existentes</strong> para liberar carga.</p>
+        </div>
+        <div class="timeline-step">
+            <i class="fas fa-chart-simple icon-lg"></i>
+            <h3>Semana 3-4</h3>
+            <p>Definir métricas (velocidad, resolución, feedback cualitativo). Configurar dashboard simple (a cargo del manager con perfil técnico).</p>
+        </div>
+        <div class="timeline-step">
+            <i class="fas fa-people-group icon-lg"></i>
+            <h3>Semana 5-8</h3>
+            <p>Reuniones quincenales de pares (facilitadas por managers, 2h/semana). Se documentan casos de éxito y se reconoce públicamente.</p>
+        </div>
+        <div class="timeline-step">
+            <i class="fas fa-chart-line icon-lg"></i>
+            <h3>Semana 9-12</h3>
+            <p>Evaluar mejoras. Ajustar métricas y dinámicas. Decidir escalabilidad.</p>
+        </div>
+    </div>
+    <div style="background: #0e2b38; color: white; padding: 1.5rem; border-radius: 2rem; margin-top: 1.5rem;">
+        <i class="fas fa-lightbulb"></i> <strong>Premisa:</strong> El piloto no es microgestión, es habilitador. Las herramientas liberan tiempo, los incentivos psicológicos dan dirección.
+    </div>
+</div>
+
+<!-- SLIDE 6: Resultados esperados (tangibles) -->
+<div class="slide">
+    <h2>📊 Impacto en 3 meses (piloto)</h2>
+    <div class="grid-3">
+        <div class="card">
+            <i class="fas fa-clock icon-lg"></i>
+            <div class="metric-lg">-20%</div>
+            <p>tiempo de respuesta a consultas complejas</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-check-double icon-lg"></i>
+            <div class="metric-lg">+15%</div>
+            <p>resolución sin escalar a managers</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-face-smile icon-lg"></i>
+            <div class="metric-lg">+10%</div>
+            <p>satisfacción cualitativa (encuesta post-caso)</p>
+        </div>
+    </div>
+    <div style="margin-top: 2rem; padding: 1.5rem; background: #eef4ff; border-radius: 1.5rem;">
+        <p><strong>Además:</strong> Reducción de horas dedicadas a tareas administrativas (gracias a herramientas) → más tiempo para clientes.</p>
+    </div>
+</div>
+
+<!-- SLIDE 7: Acción concreta y debate abierto -->
+<div class="slide">
+    <h2>✅ Acción concreta (operación + herramientas)</h2>
+    <div class="grid-2">
+        <div>
+            <ul style="list-style: none; font-size: 1.2rem;">
+                <li><i class="fas fa-check-circle" style="color:#2563eb;"></i> <strong>Managers OP:</strong> seleccionar grupo piloto y dedicar 2h/semana a facilitar reuniones de pares.</li>
+                <li><i class="fas fa-check-circle" style="color:#2563eb;"></i> <strong>Desarrollo de Producto/herramientas:</strong> definir tareas críticas (módulos del software) y desarrollar herramientas (ya tenemos ejemplos desarrollados que optimizan el tiempo de operación, para que el consultor pueda ser más consultor).</li>
+                <li><i class="fas fa-check-circle" style="color:#2563eb;"></i> <strong>Desarrollar Tecnología:</strong> habilitar un tablero simple con métricas (tarea del Manager OP, no requiere desarrollo pesado; la operación tiene ahora una persona que puede hacer productos a medida que requiere la operación).</li>
+                <li><i class="fas fa-check-circle" style="color:#2563eb;"></i> <strong>Recursos:</strong> horas existentes, equilibrio de cargas de los 2 managers para que el sistema mejore de forma escalable. Nada extraordinario.</li>
+            </ul>
+        </div>
+        <div style="background: #1d3f55; color: white; border-radius: 2rem; padding: 2rem;">
+            <i class="fas fa-hourglass-half" style="font-size: 2.5rem;"></i>
+            <p style="font-size: 1.8rem; font-weight: 300;">Piloto arranca en <strong>2 semanas</strong></p>
+            <p>Resultados a los 3 meses. Si funcionan, escalamos con ajustes. Si no, aprendemos y pivotamos.</p>
+        </div>
+    </div>
+    <div class="debate-box">
+        <h3><i class="fas fa-comment-dots"></i> Debate abierto: ¿esto realmente funcionará?</h3>
+        <p><strong>Argumentos a favor:</strong> Tenemos herramientas que ya demostraron ahorrar horas (solo falta autorizarlas). Los incentivos psicológicos han funcionado en equipos pequeños. Los managers están comprometidos.</p>
+        <p><strong>Argumentos en contra:</strong> Las herramientas no están validadas por producto y pueden generar resistencia. Las métricas pueden ser manipuladas. El tiempo de los managers no está realmente liberado. El piloto puede crear un efecto Hawthorne que desaparezca al escalar.</p>
+        <p><strong>Pregunta clave:</strong> ¿Qué pasa si producto bloquea las herramientas durante el piloto? ¿Qué pasa si los consultores ven las métricas como amenaza en lugar de espejo?</p>
+        <p style="margin-top: 1rem; font-size: 1.3rem; color: #facc15;">Necesitamos decidir: ¿autorizamos las herramientas hoy? ¿Diseñamos un plan de comunicación para evitar el miedo a la medición?</p>
+    </div>
+    <div style="margin-top: 2rem; padding: 1.5rem; background: #c4452c; color: white; border-radius: 2rem; text-align: center; font-size: 1.4rem;">
+        <i class="fas fa-skull-crossbones"></i> Hacer lo mismo y esperar resultados diferentes es el inicio del fracaso. Este piloto es nuestra apuesta a romper el bucle, pero solo si enfrentamos los obstáculos reales.
+    </div>
+</div>
+
+<!-- SLIDE 8: Detalle de las herramientas (actualizado) -->
+<div class="slide">
+    <h2>🛠️ Herramientas: existentes y por desarrollar</h2>
+    <p style="font-size: 1.2rem; margin-bottom: 2rem;">Desarrolladas por un manager con perfil técnico (ex consultor/PM). Procesamiento 100% en el navegador con HTML, CSS, JavaScript, Chart.js y D3.js. Sin dependencias de servidor, listas para usar. El diseño se basa en la <strong>experiencia colectiva de los implementadores</strong>: las alertas y validaciones reflejan exactamente los errores que los consultores cometen o detectan a diario.</p>
+
+    <div class="tool-detail">
+        <h4><i class="fas fa-file-excel" style="color:#1d5e7a;"></i> Validador de cargas Excel</h4>
+        <p><strong>Qué hace:</strong> Toma un archivo Excel (con formato específico para cargas en Rankmi) y devuelve un reporte detallado de errores: celdas vacías, formatos incorrectos, valores fuera de rango, duplicados, etc. Todo en el navegador, sin enviar datos a ningún servidor.</p>
+        <p><strong>Estado:</strong> Prototipo funcional. Requiere pulir mensajes de error y adaptarlo a cambios recientes en la plataforma.</p>
+        <p><strong>Impacto:</strong> Un consultor que hoy gasta 2-3 horas revisando excels manualmente podría hacerlo en 5 minutos.</p>
+    </div>
+
+    <div class="tool-detail">
+        <h4><i class="fas fa-bullseye" style="color:#1d5e7a;"></i> Generador de grupos de metas</h4>
+        <p><strong>Qué hace:</strong> A partir de una plantilla con colaboradores y objetivos, genera la estructura de grupos de metas exacta que el sistema Rankmi requiere para cargar masivamente. Evita errores de formato y validación manual.</p>
+        <p><strong>Estado:</strong> Funcional, pero necesita integrarse con la lógica más reciente de la plataforma (cambian los campos).</p>
+        <p><strong>Impacto:</strong> Ahorra horas de preparación y reduce rechazos en carga.</p>
+    </div>
+
+    <div class="tool-detail">
+        <h4><i class="fas fa-link" style="color:#1d5e7a;"></i> Ventana de links directos (Producto)</h4>
+        <p><strong>Qué hace:</strong> Genera accesos directos a funcionalidades internas (reportes, paneles) que hoy requieren múltiples clics y navegación. Unifica en una interfaz simple.</p>
+        <p><strong>Estado:</strong> Concepto probado, requiere desarrollo front-end adicional.</p>
+        <p><strong>Impacto:</strong> Reduce el tiempo perdido navegando por la plataforma.</p>
+    </div>
+
+    <div class="tool-detail">
+        <h4><i class="fas fa-chart-pie" style="color:#1d5e7a;"></i> Otras utilidades</h4>
+        <p><strong>Dashboard de control de cargas:</strong> Visualiza el estado de las cargas masivas (éxito/error) sin necesidad de revisar logs.</p>
+        <p><strong>Generador de reportes personalizados:</strong> Permite a los consultores crear reportes ad-hoc sin depender de SQL.</p>
+    </div>
+
+    <div class="warning-note" style="margin-top: 2rem;">
+        <i class="fas fa-clock"></i> <strong>El problema real:</strong> Los consultores están sobrecargados con tareas manuales (validar excels, preparar cargas, generar reportes). Se justifica que "no tienen tiempo" para enfocarse en el cliente porque dedican horas a esto. <strong>Estas herramientas ya existen</strong> y demuestran que liberar tiempo es posible y no es complejo. Alguien ya dedicó horas a crearlas. Ahora necesitamos autorización para usarlas y <strong>desarrollar las que falten, siempre con el mismo principio: alertar lo que está mal según la experiencia de los implementadores.</strong>
+    </div>
+</div>
+
+<!-- SLIDE 9: Visión IA + cambio de mentalidad (actualizado) -->
+<div class="slide">
+    <h2>🤖 El bot IA como ejecutor, el consultor como QA</h2>
+    <div class="grid-2">
+        <div>
+            <h3><i class="fas fa-robot"></i> Contexto tecnológico actual</h3>
+            <p>Hoy es posible que una IA (mediante herramientas como browser-use, Playwright, etc.) <strong>controle un navegador</strong> y ejecute flujos completos: abrir la plataforma, cargar archivos, validar datos, generar reportes. Exactamente lo que hace un consultor hoy.</p>
+            <p><span class="badge-ai badge">Ejemplo</span> Un "bot" programado puede tomar el validador Excel, corregir errores, y cargar la información en Rankmi durante la madrugada. El consultor llega por la mañana, revisa un resumen, y ajusta solo excepciones.</p>
+            <p><strong>Medición simple:</strong> Horas que se ahorran vs. trabajo manual. Meta: <strong>cero trabajo manual en tareas repetitivas.</strong></p>
+        </div>
+        <div>
+            <h3><i class="fas fa-exchange-alt"></i> Cambio de rol</h3>
+            <ul>
+                <li><strong>Antes:</strong> Consultor = operador manual (revisa, carga, valida).</li>
+                <li><strong>Después:</strong> Consultor = QA de la IA + consultor de verdad (relación con cliente, análisis, mejora).</li>
+            </ul>
+            <p>Esto multiplica la capacidad de la operación sin necesidad de contratar más personas.</p>
+        </div>
+    </div>
+    <div class="quote-block" style="margin-top: 2rem;">
+        <i class="fas fa-quote-left"></i> La IA no reemplaza al consultor, reemplaza las tareas que el consultor no debería hacer. El objetivo es que el consultor pase de "hacedor" a "pensador".
+    </div>
+    <div style="margin-top: 2rem; background: #e0f2fe; padding: 1.5rem; border-radius: 1.5rem;">
+        <h3><i class="fas fa-stairs"></i> Etapas para llegar</h3>
+        <ol style="font-size: 1.2rem;">
+            <li><strong>Liberar tiempo:</strong> usar las herramientas actuales (validador, generador) para reducir carga manual. (Piloto inmediato)</li>
+            <li><strong>Automatizar flujos completos:</strong> desarrollar IA que orqueste esas herramientas y ejecute en el navegador. (Paralelo al piloto)</li>
+            <li><strong>Redefinir el rol:</strong> formar a los consultores en supervisión, análisis y relación con cliente. (A partir del mes 6)</li>
+        </ol>
+    </div>
+    <div class="warning-note" style="margin-top: 2rem;">
+        <i class="fas fa-brain"></i> <strong>Cambio de mentalidad necesario:</strong> El consultor debe dejar de sentirse dueño de la tarea manual y pasar a sentirse dueño del resultado. Esto requiere liderazgo y comunicación constante. No es automático.
+    </div>
+</div>
+
+<!-- SLIDE 10: Libertad de acción para la operación -->
+<div class="slide">
+    <h2>🔓 Libertad de acción: la operación debe construir</h2>
+    <div class="card-highlight">
+        <i class="fas fa-rocket icon-lg"></i>
+        <h3>Construir lo necesario a nivel de producto para la operación</h3>
+        <p>La operación necesita autonomía para desarrollar herramientas sin depender de la burocracia de producto. Las herramientas existentes son prueba de que la operación sabe lo que necesita. <strong>Debemos autorizar que la operación pueda crear y mejorar sus propias soluciones</strong>, siempre con el objetivo de liberar tiempo y alertar errores.</p>
+        <p style="margin-top: 1rem;">Esto incluye:</p>
+        <ul>
+            <li>Usar las herramientas ya desarrolladas.</li>
+            <li>Desarrollar nuevas que surjan de la experiencia diaria.</li>
+            <li>Integrarlas con el bot IA cuando esté listo.</li>
+        </ul>
+        <p><strong>Métrica de éxito:</strong> reducción de tiempo manual a cero en tareas repetitivas. Simple de medir: horas invertidas antes vs. después.</p>
+    </div>
+    <div class="warning-note" style="margin-top: 2rem;">
+        <i class="fas fa-exclamation-triangle"></i> Sin libertad de acción, el piloto se ahoga. Necesitamos un compromiso explícito de que la operación puede innovar sin pedir permiso cada vez.
+    </div>
+</div>
+
+<!-- SLIDE 11: Cierre con veredicto final -->
+<div class="slide" style="background: #0e2b38; color: white;">
+    <h2 style="color: white; border-left-color: #facc15;">⚡ Veredicto del auditor</h2>
+    <p style="font-size: 1.5rem;">El plan tiene potencial para transformar la operación, pero enfrenta dos riesgos críticos:</p>
+    <ul style="font-size: 1.3rem; margin-left: 2rem;">
+        <li>Que producto bloquee las herramientas existentes (el cuello de botella burocrático).</li>
+        <li>Que los consultores resistan el cambio de rol por miedo a ser reemplazados o por falta de preparación.</li>
+    </ul>
+    <p style="margin-top: 1.5rem;">La historia muestra que las empresas que no automatizan tareas repetitivas mueren (Blockbuster, Kodak). Las que lo hacen, escalan (Amazon, Netflix).</p>
+    <p style="margin-top: 1.5rem;">La propuesta de etapas es sólida: <strong>primero liberar tiempo, luego automatizar, luego cambiar el rol.</strong> Pero sin el primer paso, los siguientes son imposibles.</p>
+    <div style="margin-top: 2rem; padding: 1.5rem; background: #1d3f55; border-radius: 1.5rem;">
+        <i class="fas fa-quote-left"></i> El mayor riesgo no es que la IA falle, es que sigamos perdiendo tiempo humano en tareas que una máquina puede hacer mejor y más rápido.
+    </div>
+    <div style="margin-top: 2rem; text-align: center;">
+        <span class="badge-ai badge" style="font-size: 1.2rem; padding: 0.8rem 2rem;">Decisión necesaria: autorizar herramientas, dar libertad a la operación y comunicar el cambio de rol</span>
+    </div>
+</div>
+
+<footer style="text-align: center; color: #5f7d9c; padding: 1rem;">
+    ⚡ Presentación interna · Operación exponencial · Con IA como ejecutor · Mar 2026
+</footer>
+
+</body>
+</html>
