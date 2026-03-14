@@ -2,9 +2,10 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- MEJORA: viewport optimizado para dispositivos -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Rankmi · Operación exponencial · IA + personas</title>
-    <!-- Font Awesome -->
+    <!-- Font Awesome (mantenido) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -18,72 +19,87 @@
             background: #eef2f5;
             color: #1a283a;
             line-height: 1.5;
-            padding: 2rem;
+            /* MEJORA: padding responsivo */
+            padding: clamp(0.8rem, 4vw, 2rem);
         }
 
         .slide {
             max-width: 1300px;
-            margin: 0 auto 2rem auto;
+            margin: 0 auto clamp(1.2rem, 4vw, 2rem) auto;
             background: #ffffff;
-            border-radius: 2rem;
+            border-radius: clamp(1.2rem, 5vw, 2rem);
             box-shadow: 0 20px 35px -10px rgba(0,20,30,0.15);
-            padding: 3rem 4rem;
+            /* MEJORA: padding fluido */
+            padding: clamp(1.5rem, 5vw, 4rem) clamp(1.2rem, 4vw, 4rem);
             border: 1px solid #d4e0ec;
+            /* MEJORA: transición suave al redimensionar */
+            transition: padding 0.2s ease;
         }
 
         h1 {
-            font-size: 3.2rem;
+            /* MEJORA: tamaño fluido, evita overflow */
+            font-size: clamp(2rem, 8vw, 3.2rem);
             font-weight: 700;
             letter-spacing: -0.02em;
             background: linear-gradient(145deg, #0d3b4f, #1d5e7a);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 1.5rem;
+            margin-bottom: clamp(1rem, 3vh, 1.5rem);
+            line-height: 1.2;
+            word-break: break-word;
         }
 
         h2 {
-            font-size: 2.2rem;
+            font-size: clamp(1.6rem, 6vw, 2.2rem);
             font-weight: 600;
             color: #0d3b4f;
             border-left: 8px solid #c4452c;
-            padding-left: 1.5rem;
-            margin: 2.5rem 0 1.5rem 0;
+            padding-left: clamp(0.8rem, 3vw, 1.5rem);
+            margin: clamp(1.5rem, 4vh, 2.5rem) 0 clamp(1rem, 3vh, 1.5rem) 0;
+            line-height: 1.3;
+            word-break: break-word;
         }
 
         h3 {
-            font-size: 1.5rem;
+            font-size: clamp(1.2rem, 5vw, 1.5rem);
             font-weight: 600;
             color: #1b4b66;
             margin-bottom: 1rem;
             display: flex;
             align-items: center;
             gap: 0.8rem;
+            flex-wrap: wrap;
         }
 
+        /* MEJORA: grids totalmente responsivos con auto-fit */
         .grid-2 {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
+            gap: clamp(1.2rem, 3vw, 2.5rem);
         }
 
         .grid-3 {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+            gap: clamp(1.2rem, 3vw, 2rem);
         }
 
         .card {
             background: #f6faff;
-            border-radius: 1.5rem;
-            padding: 2rem;
+            border-radius: clamp(1.2rem, 4vw, 1.5rem);
+            padding: clamp(1.2rem, 4vw, 2rem);
             border: 1px solid #cfddee;
             box-shadow: 0 4px 8px rgba(0,0,0,0.02);
+            height: fit-content;
         }
 
         .card-highlight {
             background: #fff3e0;
             border-left: 6px solid #c4452c;
+            border-radius: clamp(1.2rem, 4vw, 1.5rem);
+            padding: clamp(1.2rem, 4vw, 2rem);
+            height: fit-content;
         }
 
         .badge {
@@ -92,9 +108,11 @@
             padding: 0.3rem 1rem;
             border-radius: 30px;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: clamp(0.8rem, 3vw, 0.9rem);
             display: inline-block;
             margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            white-space: nowrap;
         }
 
         .badge-orange {
@@ -128,7 +146,7 @@
         }
 
         .icon-lg {
-            font-size: 2.8rem;
+            font-size: clamp(2rem, 8vw, 2.8rem);
             color: #1d5e7a;
             margin-bottom: 0.5rem;
         }
@@ -136,54 +154,56 @@
         .divider {
             height: 2px;
             background: linear-gradient(90deg, transparent, #aac3d9, transparent);
-            margin: 2rem 0;
+            margin: clamp(1.5rem, 4vh, 2rem) 0;
         }
 
         .quote-block {
             background: #1d2e3f;
             color: white;
-            padding: 2rem;
-            border-radius: 2rem;
-            font-size: 1.3rem;
+            padding: clamp(1.2rem, 4vw, 2rem);
+            border-radius: clamp(1.2rem, 4vw, 2rem);
+            font-size: clamp(1rem, 4vw, 1.3rem);
             font-style: italic;
         }
 
+        /* MEJORA: timeline flexible */
         .timeline {
             display: flex;
-            gap: 1.5rem;
+            gap: clamp(1rem, 3vw, 1.5rem);
             flex-wrap: wrap;
-            margin: 2rem 0;
+            margin: clamp(1.5rem, 4vh, 2rem) 0;
         }
 
         .timeline-step {
             background: #ecf3fa;
-            border-radius: 2rem;
-            padding: 1.5rem;
-            flex: 1 1 200px;
+            border-radius: clamp(1.2rem, 4vw, 2rem);
+            padding: clamp(1.2rem, 4vw, 1.5rem);
+            flex: 1 1 min(250px, 100%);
             border: 1px solid #b9d0e5;
         }
 
         .warning-note {
             background: #fff1e0;
             border-left: 6px solid #c4452c;
-            padding: 1.5rem;
+            padding: clamp(1rem, 4vw, 1.5rem);
             border-radius: 1rem;
             margin: 1.5rem 0;
             font-weight: 500;
+            font-size: clamp(0.95rem, 3.5vw, 1rem);
         }
 
         .single-point {
             background: #0e2b38;
             color: white;
-            padding: 2rem;
+            padding: clamp(1.2rem, 4vw, 2rem);
             border-radius: 1.5rem;
             margin-top: 2rem;
         }
 
         .debate-box {
             background: #1d2e3f;
-            border-radius: 2rem;
-            padding: 2rem;
+            border-radius: clamp(1.2rem, 4vw, 2rem);
+            padding: clamp(1.2rem, 4vw, 2rem);
             color: white;
             margin-top: 2rem;
         }
@@ -194,29 +214,92 @@
 
         .tool-detail {
             background: #f0f5fa;
-            border-radius: 1.5rem;
-            padding: 1.5rem;
+            border-radius: clamp(1.2rem, 4vw, 1.5rem);
+            padding: clamp(1.2rem, 4vw, 1.5rem);
             border: 1px solid #b0c8dd;
             margin-bottom: 1.5rem;
         }
 
         .tool-detail h4 {
-            font-size: 1.3rem;
+            font-size: clamp(1.1rem, 4.5vw, 1.3rem);
             color: #0d3b4f;
             margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
         }
 
         footer {
             text-align: center;
             color: #5f7d9c;
-            font-size: 0.9rem;
-            margin-top: 2rem;
+            font-size: clamp(0.8rem, 3vw, 0.9rem);
+            margin-top: clamp(1rem, 4vh, 2rem);
+            padding: 0 0.5rem;
         }
 
-        @media (max-width: 800px) {
-            .slide { padding: 2rem; }
-            h1 { font-size: 2.5rem; }
-            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+        /* MEJORA: métricas responsivas */
+        .metric-lg {
+            font-size: clamp(2rem, 10vw, 3rem);
+            font-weight: 700;
+            color: #c4452c;
+            line-height: 1.2;
+        }
+
+        /* MEJORA: listas adaptables */
+        ul {
+            padding-left: 1.5rem;
+            font-size: clamp(0.95rem, 3.5vw, 1.2rem);
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            word-break: break-word;
+        }
+
+        p {
+            font-size: clamp(0.95rem, 3.5vw, 1.1rem);
+            word-break: break-word;
+        }
+
+        /* MEJORA: elementos flotantes responsivos */
+        .single-point i.fa-bullseye {
+            float: left;
+            margin-right: 1rem;
+            margin-bottom: 0.5rem;
+            font-size: clamp(1.5rem, 6vw, 2rem);
+        }
+
+        /* MEJORA: evitar scroll horizontal en móviles muy pequeños */
+        @media (max-width: 400px) {
+            .badge {
+                white-space: normal;
+                word-break: break-word;
+                text-align: center;
+            }
+            
+            h3 i {
+                min-width: 24px;
+            }
+            
+            .grid-2, .grid-3 {
+                gap: 1rem;
+            }
+        }
+
+        /* MEJORA: mejor espaciado táctil en móvil */
+        @media (max-width: 600px) {
+            .timeline-step {
+                flex-basis: 100%;
+            }
+            
+            .card, .card-highlight, .tool-detail {
+                padding: 1.2rem;
+            }
+            
+            .debate-box p {
+                margin-bottom: 1rem;
+            }
         }
     </style>
 </head>
@@ -224,8 +307,8 @@
 
 <!-- SLIDE 1: La cara de Rankmi son estas personas -->
 <div class="slide">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-        <span class="badge badge-orange" style="font-size: 1.1rem;"><i class="fas fa-bolt"></i> diagnóstico operación pura</span>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 0.8rem;">
+        <span class="badge badge-orange" style="font-size: clamp(0.9rem, 4vw, 1.1rem);"><i class="fas fa-bolt"></i> diagnóstico operación pura</span>
         <span class="badge-dark badge">enfoque: personas + IA</span>
     </div>
     <h1>La primera capa: <br>personas, no sistema. <span style="color:#c4452c;">¿Y si hacemos lo mismo?</span></h1>
@@ -252,7 +335,7 @@
     </div>
     <div class="single-point">
         <i class="fas fa-bullseye" style="color: #facc15; font-size: 2rem; float: left; margin-right: 1rem;"></i>
-        <p style="font-size: 1.4rem; font-weight: 300;"><strong>Punto único de falla:</strong> Creer que un sistema rígido reemplazará el talento. No podemos fabricar "genes raros", pero podemos hacer visible su valor y contagiar prácticas.</p>
+        <p style="font-size: clamp(1.1rem, 5vw, 1.4rem); font-weight: 300;"><strong>Punto único de falla:</strong> Creer que un sistema rígido reemplazará el talento. No podemos fabricar "genes raros", pero podemos hacer visible su valor y contagiar prácticas.</p>
     </div>
 </div>
 
@@ -367,7 +450,7 @@
             <p>Evaluar mejoras. Ajustar métricas y dinámicas. Decidir escalabilidad.</p>
         </div>
     </div>
-    <div style="background: #0e2b38; color: white; padding: 1.5rem; border-radius: 2rem; margin-top: 1.5rem;">
+    <div style="background: #0e2b38; color: white; padding: clamp(1rem, 4vw, 1.5rem); border-radius: 2rem; margin-top: 1.5rem;">
         <i class="fas fa-lightbulb"></i> <strong>Premisa:</strong> El piloto no es microgestión, es habilitador. Las herramientas liberan tiempo, los incentivos psicológicos dan dirección.
     </div>
 </div>
@@ -392,7 +475,7 @@
             <p>satisfacción cualitativa (encuesta post-caso)</p>
         </div>
     </div>
-    <div style="margin-top: 2rem; padding: 1.5rem; background: #eef4ff; border-radius: 1.5rem;">
+    <div style="margin-top: 2rem; padding: clamp(1rem, 4vw, 1.5rem); background: #eef4ff; border-radius: 1.5rem;">
         <p><strong>Además:</strong> Reducción de horas dedicadas a tareas administrativas (gracias a herramientas) → más tiempo para clientes.</p>
     </div>
 </div>
@@ -402,16 +485,16 @@
     <h2>✅ Acción concreta (operación + herramientas)</h2>
     <div class="grid-2">
         <div>
-            <ul style="list-style: none; font-size: 1.2rem;">
-                <li><i class="fas fa-check-circle" style="color:#2563eb;"></i> <strong>Managers OP:</strong> seleccionar grupo piloto y dedicar 2h/semana a facilitar reuniones de pares.</li>
-                <li><i class="fas fa-check-circle" style="color:#2563eb;"></i> <strong>Desarrollo de Producto/herramientas:</strong> definir tareas críticas (módulos del software) y desarrollar herramientas (ya tenemos ejemplos desarrollados que optimizan el tiempo de operación, para que el consultor pueda ser más consultor).</li>
-                <li><i class="fas fa-check-circle" style="color:#2563eb;"></i> <strong>Desarrollar Tecnología:</strong> habilitar un tablero simple con métricas (tarea del Manager OP, no requiere desarrollo pesado; la operación tiene ahora una persona que puede hacer productos a medida que requiere la operación).</li>
-                <li><i class="fas fa-check-circle" style="color:#2563eb;"></i> <strong>Recursos:</strong> horas existentes, equilibrio de cargas de los 2 managers para que el sistema mejore de forma escalable. Nada extraordinario.</li>
+            <ul style="list-style: none; font-size: clamp(1rem, 4vw, 1.2rem); padding-left: 0;">
+                <li style="margin-bottom: 1rem;"><i class="fas fa-check-circle" style="color:#2563eb;"></i> <strong>Managers OP:</strong> seleccionar grupo piloto y dedicar 2h/semana a facilitar reuniones de pares.</li>
+                <li style="margin-bottom: 1rem;"><i class="fas fa-check-circle" style="color:#2563eb;"></i> <strong>Desarrollo de Producto/herramientas:</strong> definir tareas críticas (módulos del software) y desarrollar herramientas (ya tenemos ejemplos desarrollados que optimizan el tiempo de operación, para que el consultor pueda ser más consultor).</li>
+                <li style="margin-bottom: 1rem;"><i class="fas fa-check-circle" style="color:#2563eb;"></i> <strong>Desarrollar Tecnología:</strong> habilitar un tablero simple con métricas (tarea del Manager OP, no requiere desarrollo pesado; la operación tiene ahora una persona que puede hacer productos a medida que requiere la operación).</li>
+                <li style="margin-bottom: 1rem;"><i class="fas fa-check-circle" style="color:#2563eb;"></i> <strong>Recursos:</strong> horas existentes, equilibrio de cargas de los 2 managers para que el sistema mejore de forma escalable. Nada extraordinario.</li>
             </ul>
         </div>
-        <div style="background: #1d3f55; color: white; border-radius: 2rem; padding: 2rem;">
-            <i class="fas fa-hourglass-half" style="font-size: 2.5rem;"></i>
-            <p style="font-size: 1.8rem; font-weight: 300;">Piloto arranca en <strong>2 semanas</strong></p>
+        <div style="background: #1d3f55; color: white; border-radius: 2rem; padding: clamp(1.5rem, 5vw, 2rem);">
+            <i class="fas fa-hourglass-half" style="font-size: clamp(2rem, 8vw, 2.5rem);"></i>
+            <p style="font-size: clamp(1.3rem, 6vw, 1.8rem); font-weight: 300;">Piloto arranca en <strong>2 semanas</strong></p>
             <p>Resultados a los 3 meses. Si funcionan, escalamos con ajustes. Si no, aprendemos y pivotamos.</p>
         </div>
     </div>
@@ -420,9 +503,9 @@
         <p><strong>Argumentos a favor:</strong> Tenemos herramientas que ya demostraron ahorrar horas (solo falta autorizarlas). Los incentivos psicológicos han funcionado en equipos pequeños. Los managers están comprometidos.</p>
         <p><strong>Argumentos en contra:</strong> Las herramientas no están validadas por producto y pueden generar resistencia. Las métricas pueden ser manipuladas. El tiempo de los managers no está realmente liberado. El piloto puede crear un efecto Hawthorne que desaparezca al escalar.</p>
         <p><strong>Pregunta clave:</strong> ¿Qué pasa si producto bloquea las herramientas durante el piloto? ¿Qué pasa si los consultores ven las métricas como amenaza en lugar de espejo?</p>
-        <p style="margin-top: 1rem; font-size: 1.3rem; color: #facc15;">Necesitamos decidir: ¿autorizamos las herramientas hoy? ¿Diseñamos un plan de comunicación para evitar el miedo a la medición?</p>
+        <p style="margin-top: 1rem; font-size: clamp(1.1rem, 4.5vw, 1.3rem); color: #facc15;">Necesitamos decidir: ¿autorizamos las herramientas hoy? ¿Diseñamos un plan de comunicación para evitar el miedo a la medición?</p>
     </div>
-    <div style="margin-top: 2rem; padding: 1.5rem; background: #c4452c; color: white; border-radius: 2rem; text-align: center; font-size: 1.4rem;">
+    <div style="margin-top: 2rem; padding: clamp(1rem, 4vw, 1.5rem); background: #c4452c; color: white; border-radius: 2rem; text-align: center; font-size: clamp(1.1rem, 5vw, 1.4rem);">
         <i class="fas fa-skull-crossbones"></i> Hacer lo mismo y esperar resultados diferentes es el inicio del fracaso. Este piloto es nuestra apuesta a romper el bucle, pero solo si enfrentamos los obstáculos reales.
     </div>
 </div>
@@ -430,7 +513,7 @@
 <!-- SLIDE 8: Detalle de las herramientas (actualizado) -->
 <div class="slide">
     <h2>🛠️ Herramientas: existentes y por desarrollar</h2>
-    <p style="font-size: 1.2rem; margin-bottom: 2rem;">Desarrolladas por un manager con perfil técnico (ex consultor/PM). Procesamiento 100% en el navegador con HTML, CSS, JavaScript, Chart.js y D3.js. Sin dependencias de servidor, listas para usar. El diseño se basa en la <strong>experiencia colectiva de los implementadores</strong>: las alertas y validaciones reflejan exactamente los errores que los consultores cometen o detectan a diario.</p>
+    <p style="font-size: clamp(1rem, 4vw, 1.2rem); margin-bottom: 2rem;">Desarrolladas por un manager con perfil técnico (ex consultor/PM). Procesamiento 100% en el navegador con HTML, CSS, JavaScript, Chart.js y D3.js. Sin dependencias de servidor, listas para usar. El diseño se basa en la <strong>experiencia colectiva de los implementadores</strong>: las alertas y validaciones reflejan exactamente los errores que los consultores cometen o detectan a diario.</p>
 
     <div class="tool-detail">
         <h4><i class="fas fa-file-excel" style="color:#1d5e7a;"></i> Validador de cargas Excel</h4>
@@ -486,9 +569,9 @@
     <div class="quote-block" style="margin-top: 2rem;">
         <i class="fas fa-quote-left"></i> La IA no reemplaza al consultor, reemplaza las tareas que el consultor no debería hacer. El objetivo es que el consultor pase de "hacedor" a "pensador".
     </div>
-    <div style="margin-top: 2rem; background: #e0f2fe; padding: 1.5rem; border-radius: 1.5rem;">
+    <div style="margin-top: 2rem; background: #e0f2fe; padding: clamp(1rem, 4vw, 1.5rem); border-radius: 1.5rem;">
         <h3><i class="fas fa-stairs"></i> Etapas para llegar</h3>
-        <ol style="font-size: 1.2rem;">
+        <ol style="font-size: clamp(1rem, 4vw, 1.2rem); padding-left: 1.5rem;">
             <li><strong>Liberar tiempo:</strong> usar las herramientas actuales (validador, generador) para reducir carga manual. (Piloto inmediato)</li>
             <li><strong>Automatizar flujos completos:</strong> desarrollar IA que orqueste esas herramientas y ejecute en el navegador. (Paralelo al piloto)</li>
             <li><strong>Redefinir el rol:</strong> formar a los consultores en supervisión, análisis y relación con cliente. (A partir del mes 6)</li>
@@ -522,18 +605,18 @@
 <!-- SLIDE 11: Cierre con veredicto final -->
 <div class="slide" style="background: #0e2b38; color: white;">
     <h2 style="color: white; border-left-color: #facc15;">⚡ Veredicto del auditor</h2>
-    <p style="font-size: 1.5rem;">El plan tiene potencial para transformar la operación, pero enfrenta dos riesgos críticos:</p>
-    <ul style="font-size: 1.3rem; margin-left: 2rem;">
+    <p style="font-size: clamp(1.2rem, 5vw, 1.5rem);">El plan tiene potencial para transformar la operación, pero enfrenta dos riesgos críticos:</p>
+    <ul style="font-size: clamp(1rem, 4.5vw, 1.3rem); margin-left: clamp(1rem, 5vw, 2rem);">
         <li>Que producto bloquee las herramientas existentes (el cuello de botella burocrático).</li>
         <li>Que los consultores resistan el cambio de rol por miedo a ser reemplazados o por falta de preparación.</li>
     </ul>
     <p style="margin-top: 1.5rem;">La historia muestra que las empresas que no automatizan tareas repetitivas mueren (Blockbuster, Kodak). Las que lo hacen, escalan (Amazon, Netflix).</p>
     <p style="margin-top: 1.5rem;">La propuesta de etapas es sólida: <strong>primero liberar tiempo, luego automatizar, luego cambiar el rol.</strong> Pero sin el primer paso, los siguientes son imposibles.</p>
-    <div style="margin-top: 2rem; padding: 1.5rem; background: #1d3f55; border-radius: 1.5rem;">
+    <div style="margin-top: 2rem; padding: clamp(1rem, 4vw, 1.5rem); background: #1d3f55; border-radius: 1.5rem;">
         <i class="fas fa-quote-left"></i> El mayor riesgo no es que la IA falle, es que sigamos perdiendo tiempo humano en tareas que una máquina puede hacer mejor y más rápido.
     </div>
     <div style="margin-top: 2rem; text-align: center;">
-        <span class="badge-ai badge" style="font-size: 1.2rem; padding: 0.8rem 2rem;">Decisión necesaria: autorizar herramientas, dar libertad a la operación y comunicar el cambio de rol</span>
+        <span class="badge-ai badge" style="font-size: clamp(1rem, 4.5vw, 1.2rem); padding: 0.8rem clamp(1rem, 5vw, 2rem); white-space: normal; line-height: 1.4;">Decisión necesaria: autorizar herramientas, dar libertad a la operación y comunicar el cambio de rol</span>
     </div>
 </div>
 
